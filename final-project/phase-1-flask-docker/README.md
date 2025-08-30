@@ -19,6 +19,9 @@ git clone https://github.com/MatanReuvenTal/devops-course.git
 cd devops-course/final-project/phase-1-flask-docker
 docker-compose up -d
 ```
+## Access Application
+Open: http://localhost:5000
+
 ## Files Structure
 ```bash
 ├── Dockerfile          # Multi-stage build
