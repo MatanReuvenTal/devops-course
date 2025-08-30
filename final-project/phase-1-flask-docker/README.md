@@ -20,8 +20,10 @@ cd devops-course/final-project/phase-1-flask-docker
 docker-compose up -d
 ```
 ## Files Structure
+```bash
 ├── Dockerfile          # Multi-stage build
 ├── docker-compose.yml  # Multi-service setup
 ├── app.py              # Flask application
 ├── requirements.txt    # Dependencies
 └── README.md
+```
