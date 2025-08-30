@@ -23,10 +23,11 @@ docker-compose up -d
 Open: http://localhost:5000
 ## Run from Docker Hub
 You can also pull and run the image directly from Docker Hub without building:
-
+```bash
 docker pull matanreuvental/quakewatch-web:latest
 docker run -d -p 5000:5000 matanreuvental/quakewatch-web:latest
-- [Link](https://hub.docker.com/repository/docker/matanreuvental/quakewatch-web/general)
+```
+- [Link to repository](https://hub.docker.com/repository/docker/matanreuvental/quakewatch-web/general)
 ## Files Structure
 ```bash
 ├── Dockerfile          # Multi-stage build
