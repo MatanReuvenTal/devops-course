@@ -5,7 +5,7 @@ Simple Flask web application containerized with Docker using multi-stage builds.
 ---
 
 ## Prerequisites
-- [Docker](https://docs.docker.com/get-docker/) installed and *running* 
+- [Docker](https://docs.docker.com/get-docker/) installed and **running** 
 - [Git](https://git-scm.com/downloads) installed  
 
 ---
