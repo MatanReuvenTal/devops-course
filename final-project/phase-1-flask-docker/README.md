@@ -16,7 +16,7 @@ Clone the repository and run the containerized application:
 
 ```bash
 git clone https://github.com/MatanReuvenTal/devops-course.git
-cd devops-course/final-project/phase-1-flask-docker
+cd devops-course/final-project/phase-1-flask-docker/QuakeWatch
 docker-compose up -d
 ```
 ## Access Application
@@ -28,6 +28,36 @@ docker pull matanreuvental/quakewatch-web:latest
 docker run -d -p 5000:5000 matanreuvental/quakewatch-web:latest
 ```
 - [Link to repository](https://hub.docker.com/repository/docker/matanreuvental/quakewatch-web/general)
+# Proving Persistence with Docker Volumes
+
+1) Run container with a named volume
+```bash
+docker compose up -d
+```
+
+2) Generate some logs
+
+3) Open http://localhost:5000 a few times
+
+4) Then check inside the container:
+``` bash
+docker compose exec web sh -c "tail -n 5 /app/logs/app.log"
+```
+
+5) Remove the container completely
+``` bash
+docker compose down
+```
+
+6) Start a new container with the same volume
+```bash
+docker compose up -d
+```
+7) Verify the old logs are still there
+```bash
+docker compose exec web sh -c "tail -n 5 /app/logs/app.log"
+```
+
 ## Files Structure
 ```bash
 ├── Dockerfile          # Multi-stage build
