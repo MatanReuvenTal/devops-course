@@ -1,5 +1,6 @@
 services:
   web:
+    build: .
     image: matanreuvental/quakewatch-web:latest
     ports:
       - "5000:5000"
