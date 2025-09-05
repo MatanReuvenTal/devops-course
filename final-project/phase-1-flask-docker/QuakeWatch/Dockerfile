@@ -9,6 +9,7 @@ FROM python:3.9-slim as runtime
 WORKDIR /app
 COPY --from=builder /opt/venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
+RUN mkdir -p /app/logs
 COPY app.py /app/app.py
 EXPOSE 5000
 CMD ["python", "/app/app.py"]

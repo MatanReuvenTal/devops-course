@@ -1,4 +1,9 @@
+import logging
 from flask import Flask
+# Create logs directory and configure logging
+logging.basicConfig(filename='/app/logs/app.log',
+                    level=logging.INFO,
+                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 app = Flask(__name__)
 
 @app.route('/')
