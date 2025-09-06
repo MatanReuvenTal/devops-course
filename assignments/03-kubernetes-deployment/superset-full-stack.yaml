@@ -1,0 +1,123 @@
+# 1. Secret for PostgreSQL Password
+apiVersion: v1
+kind: Secret
+metadata:
+  name: postgres-secret
+type: Opaque
+data:
+  # The password is 'mysecretpassword', encoded in base64
+  postgres-password: bXlzZWNyZXRwYXNzd29yZA==
+---
+# 2. Persistent Volume Claim for PostgreSQL Data
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+# 3. PostgreSQL Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-service
+spec:
+  selector:
+    app: postgres
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
+---
+# 4. PostgreSQL Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:13
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_DB
+          value: "superset"
+        - name: POSTGRES_USER
+          value: "superset"
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret # Read from the Secret we created
+              key: postgres-password
+        volumeMounts:
+        - name: postgres-storage
+          mountPath: /var/lib/postgresql/data
+      volumes:
+      - name: postgres-storage
+        persistentVolumeClaim:
+          claimName: postgres-pvc # Use the PVC we created
+---
+# 5. Superset Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: superset-service
+spec:
+  type: NodePort
+  selector:
+    app: superset
+  ports:
+    - protocol: TCP
+      port: 8088
+      targetPort: 8088
+---
+# 6. Superset Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: superset-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: superset
+  template:
+    metadata:
+      labels:
+        app: superset
+    spec:
+      containers:
+      - name: superset
+        image: amancevice/superset
+        ports:
+        - containerPort: 8088
+        env:
+        - name: SUPERSET_SECRET_KEY
+          value: "a-very-secret-key" # Required by Superset for security
+        - name: DATABASE_HOST
+          value: "postgres-service" # The name of our PostgreSQL Service
+        - name: DATABASE_DB
+          value: "superset"
+        - name: DATABASE_USER
+          value: "superset"
+        - name: DATABASE_PORT
+          value: "5432"
+        - name: DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret # Also read from the Secret
+              key: postgres-password
