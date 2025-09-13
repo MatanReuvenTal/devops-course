@@ -3,6 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: nginx-pvc
 spec:
+  storageClassName: ""
   accessModes:
     - ReadWriteOnce
   resources:

@@ -1,0 +1,34 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: log-time-cronjob
+spec:
+  schedule: "*/1 * * * *"
+
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: log-generator
+              image: busybox:latest
+              command: ["sh", "-c", "date > /data/current_time.txt"]
+              volumeMounts:
+                - mountPath: /data
+                  name: shared-data
+            - name: log-writer-sidecar
+              image: busybox:latest
+              command: ["sh","-c", "cat /data/current_time.txt >> /mnt/logs/time.log"]
+              volumeMounts:
+                - mountPath: /data
+                  name: shared-data
+                - mountPath: /mnt/logs
+                  name: log-volume
+          restartPolicy: OnFailure
+          volumes:
+            - name: log-volume
+              persistentVolumeClaim:
+                claimName: nginx-pvc
+            - name: shared-data
+              emptyDir: {}
+
