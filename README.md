@@ -55,10 +55,10 @@ This repository is organized by the course sessions. Each module includes a hand
 
 The course culminates in a multi-phase final project where I will build a complete, production-ready DevOps pipeline from scratch.
 
--   [cite_start]**Phase 1:** Develop and containerize a Python Flask application and push the image to Docker Hub. [cite: 331]
--   [cite_start]**Phase 2:** Deploy the application on Kubernetes, managing configurations with ConfigMaps and Secrets, and implementing auto-scaling. [cite: 332]
--   [cite_start]**Phase 3:** Implement version control with Git, build a full CI/CD pipeline using GitHub Actions, and manage deployments with Helm. [cite: 333]
--   [cite_start]**Phase 4:** Apply GitOps principles for automated deployments with ArgoCD and set up a complete monitoring stack with Prometheus and Grafana. [cite: 334]
+-   **Phase 1:** Develop and containerize a Python Flask application and push the image to Docker Hub. 
+-   **Phase 2:** Deploy the application on Kubernetes, managing configurations with ConfigMaps and Secrets, and implementing auto-scaling. 
+-   **Phase 3:** Implement version control with Git, build a full CI/CD pipeline using GitHub Actions, and manage deployments with Helm. 
+-   **Phase 4:** Apply GitOps principles for automated deployments with ArgoCD and set up a complete monitoring stack with Prometheus and Grafana. 
 
 ---
 
@@ -66,4 +66,4 @@ The course culminates in a multi-phase final project where I will build a comple
 
 My name is Matan Reuven Tal, and I am on a journey of professional growth and development in the DevOps world. I am passionate about automation, cloud infrastructure, and improving software development lifecycles.
 
-Feel free to connect with me on [LinkedIn](https://www.linkedin.com/) (replace with your profile link).
+Feel free to connect with me on [LinkedIn](https://www.linkedin.com/in/matan-tal-a0613a231).
