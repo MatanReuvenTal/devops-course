@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quakewatch-web
+  labels:
+    app: quakewatch
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: quakewatch
+  template:
+    metadata:
+      labels:
+        app: quakewatch
+    spec:
+      containers:
+        - name: quakewatch-container
+          image: matanreuvental/quakewatch-web:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort:  5000
+              protocol: TCP
+      restartPolicy: Always
+      
