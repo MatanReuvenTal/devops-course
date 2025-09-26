@@ -21,9 +21,18 @@ spec:
           ports:
             - containerPort:  5000
               protocol: TCP
+          env:
+            - name:   API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: quakewatch-secret
+                  key: API_KEY
+          envFrom:
+            - configMapRef:
+                name: quakewatch-config
           readinessProbe:
             httpGet:
-              path: health
+              path: /health
               port: 5000
             initialDelaySeconds: 5
             periodSeconds: 10

@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, jsonify, request, send_file, curre
 from utils import generate_graph, get_top_earthquakes, get_last_earthquake, COUNTRIES
 from datetime import datetime, timedelta
 import requests
+import os
 
 dashboard_blueprint = Blueprint('dashboard', __name__)
 
@@ -9,7 +10,14 @@ class EarthquakeDashboard:
     @staticmethod
     @dashboard_blueprint.route('/')
     def main_page():
-        return render_template('main_page.html')
+        # Read the environment variables we injected from Kubernetes
+        app_title = os.environ.get('APP_TITLE', 'Default QuakeWatch Title')
+        api_key_status = "Set" if os.environ.get('API_KEY') else "Not Set"
+
+        # Pass the variables to the HTML template
+        return render_template('main_page.html',
+                               title=app_title,
+                               key_status=api_key_status)
 
     @staticmethod
     @dashboard_blueprint.route('/ping')
