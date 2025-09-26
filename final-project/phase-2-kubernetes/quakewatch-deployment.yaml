@@ -21,6 +21,10 @@ spec:
           ports:
             - containerPort:  5000
               protocol: TCP
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
           env:
             - name:   API_KEY
               valueFrom:
