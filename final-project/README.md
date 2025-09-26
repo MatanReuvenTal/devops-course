@@ -17,6 +17,10 @@ This document outlines the steps to deploy the containerized QuakeWatch applicat
 All Kubernetes manifest files are located in the `phase-2-kubernetes` directory. Apply them in the following order to ensure dependencies are met.
 
 Navigate to the project's `phase-2-kubernetes` directory before running the commands.
+First, navigate to the project's `phase-2-kubernetes` directory:
+```bash
+cd path/to/devops-course/final-project/phase-2-kubernetes
+```
 
 ### a. Apply Configuration and Secrets
 
