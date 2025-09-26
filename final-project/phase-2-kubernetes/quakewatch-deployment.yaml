@@ -17,9 +17,21 @@ spec:
       containers:
         - name: quakewatch-container
           image: matanreuvental/quakewatch-web:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort:  5000
               protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: health
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 15
+            periodSeconds: 20
       restartPolicy: Always
-      

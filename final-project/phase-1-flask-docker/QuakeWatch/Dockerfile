@@ -10,6 +10,6 @@ WORKDIR /app
 COPY --from=builder /opt/venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 RUN mkdir -p /app/logs
-COPY app.py /app/app.py
+COPY . /app/
 EXPOSE 5000
 CMD ["python", "/app/app.py"]
