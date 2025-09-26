@@ -39,5 +39,5 @@ The project is divided into four main phases, each building upon the previous on
 
 * **Phase 4: GitOps & Monitoring**
     * **Objective:** Apply GitOps principles with ArgoCD for automated deployments and implement monitoring with Prometheus and Grafana.
-    * *(Documentation coming soon)**
+    * *(Documentation coming soon)*
   
