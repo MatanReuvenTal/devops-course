@@ -18,7 +18,7 @@ This project serves as Phase 1 of the DevOps final project.
 Clone the repository and run the containerized application using Docker Compose:
 
 ```bash
-git clone [https://github.com/MatanReuvenTal/devops-course.git](https://github.com/MatanReuvenTal/devops-course.git)
+git clone git clone https://github.com/MatanReuvenTal/devops-course.git
 cd devops-course/final-project/phase-1-flask-docker/QuakeWatch
 docker-compose up --build -d
 ```
