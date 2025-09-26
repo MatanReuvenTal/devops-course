@@ -1,4 +1,4 @@
-# QuakeWatch: Dockerized Flask Application
+# Phase 1: Dockerized Flask Application
 
 This repository contains the source code for QuakeWatch, a Flask web application that displays real-time and historical earthquake data. The application is containerized using Docker with a multi-stage build for an optimized and lightweight final image.
 
