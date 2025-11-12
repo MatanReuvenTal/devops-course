@@ -1,0 +1,31 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: nginx-alerts
+  namespace: default
+  labels:
+    release: prometheus-stack
+spec:
+  groups:
+    - name: nginx.rules
+      interval: 30s
+      rules:
+        - alert: NginxDown
+          expr: kube_deployment_status_replicas_available{deployment="nginx"} < 3
+          for: 1m
+          labels:
+            severity: critical
+            component: nginx
+          annotations:
+            summary: "Nginx deployment has less than 3 replicas"
+            description: "Nginx deployment {{ $labels.deployment }} has only {{ $value }} replicas available"
+
+        - alert: NginxHighReplicas
+          expr: kube_deployment_status_replicas{deployment="nginx"} > 4
+          for: 30s
+          labels:
+            severity: warning
+            component: nginx
+          annotations:
+            summary: "Nginx has more than 4 replicas"
+            description: "Nginx deployment has {{ $value }} replicas (threshold: 4)"
