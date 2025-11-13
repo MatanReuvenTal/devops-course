@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: quakewatch-monitor
+  labels:
+    app: quakewatch
+    release: prometheus-stack
+spec:
+  selector:
+    matchLabels:
+      app: quakewatch
+  endpoints:
+  - port: http
+    interval: 30s
