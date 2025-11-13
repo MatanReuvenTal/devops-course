@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: quakewatch-config
 data:
-  APP_TITLE: "🚀 QuakeWatch - Managed by ArgoCD! 🚀"
+  APP_TITLE: "🎉 QuakeWatch with Auto-Reload! 🎉"
