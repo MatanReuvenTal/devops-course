@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  localstack:
+    image: localstack/localstack-pro
+    container_name: localstack
+    ports:
+      - "4566:4566"            # Main Gateway Port
+      - "4510-4559:4510-4559"  # Port range for external services
+    environment:
+      # Essential services for the assignment
+      - SERVICES=s3,ec2,iam,sts,cloudformation
+      - DEFAULT_REGION=us-east-1
+      - DATA_DIR=/var/lib/localstack/data
+
+      # === Student License Configuration ===
+      - LOCALSTACK_API_KEY=  ${LOCALSTACK_API_KEY}
+
+      - DNS_ADDRESS=0
+
+      # Enable debug logs to verify license activation
+      - DEBUG=1
+    volumes:
+      - ./localstack-data:/var/lib/localstack
+      - /var/run/docker.sock:/var/run/docker.sock
