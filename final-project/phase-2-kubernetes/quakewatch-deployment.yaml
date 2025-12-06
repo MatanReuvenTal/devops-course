@@ -4,6 +4,8 @@ metadata:
   name: quakewatch-web
   labels:
     app: quakewatch
+  annotations:
+    reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   selector:

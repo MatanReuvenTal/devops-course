@@ -1,0 +1,40 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: quakewatch-alerts
+  labels:
+    release: prometheus-stack
+spec:
+  groups:
+  - name: quakewatch
+    interval: 30s
+    rules:
+    - alert: QuakeWatchPodRestarting
+      expr: increase(kube_pod_container_status_restarts_total{pod=~"quakewatch-web.*"}[2m]) > 0
+      for: 30s
+      labels:
+        severity: warning
+        app: quakewatch
+      annotations:
+        summary: "QuakeWatch pod has restarted"
+        description: "Pod {{ $labels.pod }} has restarted in the last 2 minutes"
+
+    - alert: QuakeWatchPodNotReady
+      expr: kube_pod_status_ready{pod=~"quakewatch-web.*", condition="false"} == 1
+      for: 1m
+      labels:
+        severity: warning
+        app: quakewatch
+      annotations:
+        summary: "QuakeWatch pod is not ready"
+        description: "Pod {{ $labels.pod }} is not in Ready state"
+
+    - alert: QuakeWatchNoPodsRunning
+      expr: absent(kube_pod_info{pod=~"quakewatch-web.*"})
+      for: 2m
+      labels:
+        severity: critical
+        app: quakewatch
+      annotations:
+        summary: "No QuakeWatch pods are running"
+        description: "No QuakeWatch pods found in the cluster"
