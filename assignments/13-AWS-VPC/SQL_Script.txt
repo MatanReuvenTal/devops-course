@@ -1,0 +1,23 @@
+-- 1. Create the database named homework_db
+CREATE DATABASE homework_db;
+
+-- 2. Select the database to use
+USE homework_db;
+
+-- 3. Create the 'students' table with required columns
+-- id: Primary Key, automatically increments
+-- name: Text up to 50 chars, cannot be empty
+-- age: Integer, cannot be empty
+CREATE TABLE students (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    age INT NOT NULL
+);
+
+-- 4. Insert 3 rows of data into the table
+INSERT INTO students (name, age) VALUES ('Alice', 22);
+INSERT INTO students (name, age) VALUES ('Bob', 25);
+INSERT INTO students (name, age) VALUES ('Charlie', 20);
+
+-- 5. Display the table content to verify
+SELECT * FROM students;
