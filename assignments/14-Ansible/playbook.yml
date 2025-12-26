@@ -1,0 +1,7 @@
+---
+- name: Apply common configuration to servers
+  hosts: all
+  gather_facts: yes
+
+  roles:
+    - common

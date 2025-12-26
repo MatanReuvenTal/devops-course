@@ -1,0 +1,20 @@
+# Task to install required packages (vim, zip)
+- name: Install vim and zip
+  apt:
+    name:
+      - vim
+      - zip
+    state: present
+    update_cache: yes
+
+# Deploy a file with 'Hello world!' to /tmp/test1
+- name: Create a file with static content
+  copy:
+    dest: /tmp/test1
+    content: "Hello world!\n"
+
+# Deploy a template with hostname to /tmp/test2
+- name: Create a file from template with hostname
+  template:
+    src: hostname_file.j2
+    dest: /tmp/test2

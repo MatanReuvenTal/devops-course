@@ -34,3 +34,6 @@ terraform.rc
 # IDE
 .vscode/
 .idea/
+
+# Ansible artifacts
+*.retry
